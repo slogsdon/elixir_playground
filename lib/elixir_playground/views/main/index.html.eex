@@ -1,0 +1,69 @@
+<html>
+<head>
+  <title>Main.Index - ElixirPlayground</title>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
+  <style type="text/css">
+    body { padding-top: 70px; }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="/">Elixir Playground</a>
+      </div>
+
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="/run" class="snippet-form-action">Run</a></li>
+          <li><a href="/save" class="snippet-form-action">Share</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container -->
+  </nav>
+  <form method="post" id="snippet-form">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <textarea name="snippet" style="width: 100%;height: 300px;">defmodule Hello do
+  def world! do
+    IO.puts "Hello World!"
+  end
+end
+
+Hello.world!
+</textarea>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 15px;">
+        <div class="col-lg-6">
+          <textarea name="result" style="width: 100%;height: 200px;"></textarea>
+        </div>
+      </div>
+    </div>
+  </form>
+
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+  <script>
+  (function (window, document, $, undefined) {
+    $(document).ready(function () {
+
+      $('.snippet-form-action').unbind('click').click(function (e) {
+        e.preventDefault();
+        $('#snippet-form').attr('action', $(this).attr('href')).submit();
+      });
+
+    });
+  })(window, document, jQuery);
+  </script>
+</body>
+</html>
