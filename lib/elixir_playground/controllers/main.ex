@@ -8,15 +8,12 @@ defmodule ElixirPlayground.Controllers.Main do
 
   def run(conn, []) do
     conn = conn |> fetch_params
-    result = 
-      try do
-        io = ExUnit.CaptureIO.capture_io :stdio, fn ->
-          {{:ok, _}, _list} = conn.params["snippet"] |> Code.string_to_quoted |> Code.eval_quoted
-        end
-        [ok: io]
-      rescue
-        ex -> [error: ex.message]
-      end
+
+    unless conn.params["snippet"] do
+      halt! conn
+    end
+
+    result = ElixirPlayground.Eval.eval conn.params["snippet"]
     json conn, [result: result]
   end
 
