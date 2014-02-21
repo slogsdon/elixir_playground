@@ -1,9 +1,10 @@
 <html>
 <head>
-  <title>Main.Index - ElixirPlayground</title>
+  <title>Elixir Playground</title>
   <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" type="text/css">
   <style type="text/css">
     body { padding-top: 70px; }
+    textarea { font-family: "courier new"; }
   </style>
 </head>
 <body>
@@ -29,11 +30,10 @@
       </div><!-- /.navbar-collapse -->
     </div><!-- /.container -->
   </nav>
-  <form method="post" id="snippet-form">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-6">
-          <textarea name="snippet" style="width: 100%;height: 300px;">defmodule Hello do
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <textarea name="snippet" style="width: 100%;height: 300px;">defmodule Hello do
   def world! do
     IO.puts "Hello World!"
   end
@@ -41,15 +41,14 @@ end
 
 Hello.world!
 </textarea>
-        </div>
-      </div>
-      <div class="row" style="margin-top: 15px;">
-        <div class="col-lg-6">
-          <textarea name="result" style="width: 100%;height: 200px;"></textarea>
-        </div>
       </div>
     </div>
-  </form>
+    <div class="row" style="margin-top: 15px;">
+      <div class="col-lg-6">
+        <textarea name="result" style="width: 100%;height: 200px;"></textarea>
+      </div>
+    </div>
+  </div>
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
@@ -58,8 +57,30 @@ Hello.world!
     $(document).ready(function () {
 
       $('.snippet-form-action').unbind('click').click(function (e) {
+        var href = $(this).attr('href');
         e.preventDefault();
-        $('#snippet-form').attr('action', $(this).attr('href')).submit();
+
+        $.ajax({
+          type: "POST",
+          url: href,
+          data: {
+            snippet: $('textarea[name="snippet"').val()
+          },
+          success: function (data) {
+            var $result = $('textarea[name="result"]'),
+              message = '';
+
+            if (data.result.error) {
+              message = data.result.error;
+              $result.css('color', 'red');
+            } else {
+              message = data.result.ok;
+              $result.css('color', 'black');
+            }
+
+            $result.val(message);
+          }
+        });
       });
 
     });
