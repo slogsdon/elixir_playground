@@ -59,11 +59,13 @@ defmodule ElixirPlayground.Eval do
     case Code.string_to_quoted(code, [line: 1, file: "playground"]) do
       { :error, { _line, error, token } } ->
         # Encountered malformed expression
-        :elixir_errors.parse_error(1, "playground", error, token)
+        result = :elixir_errors.parse_error(1, "playground", error, token)
+        IO.inspect result
+        result
 
       {:ok, forms} ->
         res = unless is_safe?(forms, []) do
-          [error: "restricted"]
+          [status: "error", result: "restricted"]
         end
 
         res || try do
@@ -75,9 +77,9 @@ defmodule ElixirPlayground.Eval do
 
             ""
           end
-          [ok: io]
+          [status: "ok", result: io]
         rescue
-          ex -> [error: ex.message]
+          ex -> [status: "error", result: ex.message]
         end
     end
   end

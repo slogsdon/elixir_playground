@@ -1,14 +1,23 @@
 defmodule Router do
-  use Sugar.Router
+  alias ElixirPlayground.Controllers.Main
+  use Sugar.Router, plugs: [
+      { Plugs.HotCodeReload, [] },
+      { Plugs.StaticFiles, url: "/static", path: "priv/static" },
 
-  # Uncomment the following line for request logging,
-  # and add 'applications: [:exlager],' to the application
-  # Keyword list in your mix.exs
-  # plug Plugs.Logger
+      # Uncomment the following line for session store
+      # { Plugs.Session, name: "_sugar_session", adapter: Plugs.Session.Adapters.Ets },
+
+      # Uncomment the following line for request logging,
+      # and add 'applications: [:exlager],' to the application
+      # Keyword list in your mix.exs
+      # { Plugs.Logger, [] }
+  ]
 
   # Define your routes here
-  get "/", ElixirPlayground.Controllers.Main, :index
-  post "/run", ElixirPlayground.Controllers.Main, :run
-  post "/save", ElixirPlayground.Controllers.Main, :save
-  get "/s/:id", ElixirPlayground.Controllers.Main, :show
+  # Main Routes
+  get  "/",       Main, :index
+  get  "/s/:key", Main, :show
+  # Api Routes
+  post "/run",    Api,  :run
+  post "/save",   Api,  :save
 end

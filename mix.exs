@@ -20,7 +20,8 @@ defmodule ElixirPlayground.Mixfile do
   # { :barbat, "~> 0.1", github: "elixir-lang/barbat" }
   defp deps do
     [
-      { :sugar, path: "../sugar" }
+      { :sugar, github: "sugar-framework/sugar" },
+      { :"elixir-datetime", github: "alco/elixir-datetime" },
     ]
   end
 end

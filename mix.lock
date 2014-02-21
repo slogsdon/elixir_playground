@@ -3,6 +3,7 @@
   "cowlib": {:git, "git://github.com/extend/cowlib.git", "0d4ece08a7cce90a07cf33d4edad29bc324c7d90", [ref: "0.5.1"]},
   "decimal": {:git, "git://github.com/ericmj/decimal.git", "ca3ca3de2425b1ee19d175eca92d80dcfe02fdb1", []},
   "ecto": {:git, "git://github.com/elixir-lang/ecto.git", "02cd543d263212beb38d377d7b999379518016e7", []},
+  "elixir-datetime": {:git, "git://github.com/alco/elixir-datetime.git", "53a2d5da6ea98b2fbf2d51dd2ccc4eefb5d9b4e4", []},
   "erlydtl": {:git, "git://github.com/erlydtl/erlydtl.git", "8c876fde4c2b383c241d4d6cbba39d979548cd94", []},
   "exlager": {:git, "git://github.com/khia/exlager.git", "779a75350c6bf6a30b779f6d63e2d50a94c4d9a1", []},
   "goldrush": {:git, "git://github.com/DeadZen/goldrush.git", "71e63212f12c25827e0c1b4198d37d5d018a7fec", [tag: "0.1.6"]},
